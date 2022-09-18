@@ -1,2 +1,0 @@
-# TOTP-App
-TOTP App
