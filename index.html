@@ -9,6 +9,10 @@
         <link rel="apple-touch-icon" href="/lock.svg" />
         <meta name="theme-color" content="#ffffff" />
         <script type="module" src="/otpauth.umd.min.js"></script>
+        <script type="module">
+            import passworder from './src/assets/passworder.js'
+            window.passworder = passworder
+        </script>
 
         <script>
             if ('serviceWorker' in navigator) {

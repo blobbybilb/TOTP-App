@@ -1,17 +1,18 @@
 <script>
     let shownTOTP = '--- ---'
-    let shownTimer = 30
+    let shownTimer = 0
+    let shownAccount = '-'
     let totp
     // @ts-ignore
     const TOTP = OTPAuth.TOTP
     const getTimeUntilTOTPChange = () =>
         30 - (Number(new Date().getSeconds()) % 30)
 
-    export function setKey(key) {
+    export function setKey(token) {
         totp = new TOTP({
             digits: 6,
             period: 30,
-            secret: key,
+            secret: token.key,
         })
         updateDisplay()
     }
@@ -28,6 +29,7 @@
     }, 1000)
 </script>
 
+<p id="timer">{shownAccount}</p>
 <p id="otp">{shownTOTP}</p>
 <p id="timer">{shownTimer}</p>
 <hr />

@@ -2,19 +2,11 @@
     import Account from './lib/Account.svelte'
     import Titlebar from './lib/Titlebar.svelte'
     import Totpdisplay from './lib/Totpdisplay.svelte'
+    import * as data from './lib/data'
+
+    const tokenData = data.tokenData
 
     let totpdisplay
-
-    const tokenData = [
-        {
-            name: 'beep',
-            key: 'boop',
-        },
-        {
-            name: 'blip',
-            key: 'blap',
-        },
-    ]
 </script>
 
 <main>
@@ -22,7 +14,7 @@
     <Totpdisplay bind:this={totpdisplay} />
     <div id="maingrid">
         {#each tokenData as token}
-            <Account data={token} setKey={totpdisplay?.setKey} />
+            <Account {token} setKey={totpdisplay?.setKey} />
         {/each}
     </div>
 </main>

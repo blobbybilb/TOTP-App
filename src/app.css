@@ -5,3 +5,7 @@
   font-family: 'Trebuchet MS', sans-serif;
   background-color: var(--main-background-color);
 }
+
+hr {
+  border: 1px solid var(--accent-background-color);
+}

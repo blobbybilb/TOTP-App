@@ -1,10 +1,10 @@
 <script>
-    export let data
+    export let token
     export let setKey
 </script>
 
-<main on:click={() => setKey(data.key)}>
-    <p>{data.name}</p>
+<main on:click={() => setKey(token)}>
+    <p>{token.name}</p>
 </main>
 
 <style>
