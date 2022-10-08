@@ -1,7 +1,5 @@
-// // @ts-ignore
-// const passworder = window.passworder
-
 import { encryptData, decryptData } from './encryption'
+import { Data } from './types'
 
 export enum SyncStatus {
     Success,
@@ -11,28 +9,14 @@ export enum SyncStatus {
 }
 
 abstract class TemplateRemote {
-    abstract getData(
-        token: string,
-        password: string,
-        PIN: string
-    ): Promise<SyncStatus>
+    abstract getData(token: string, password: string, PIN: string): Promise<SyncStatus>
 
-    abstract setData(
-        token: string,
-        password: string,
-        PIN: string
-    ): Promise<SyncStatus>
+    abstract setData(token: string, password: string, PIN: string): Promise<SyncStatus>
 }
 
 export abstract class DefaultRemote extends TemplateRemote {
-    public static async getData(
-        token: string,
-        password: string,
-        PIN: string
-    ): Promise<SyncStatus> {
-        const recievedData = await fetch(
-            'https://totp-app.blobbybilb.workers.dev/get/' + token
-        )
+    public static async getData(token: string, password: string, PIN: string): Promise<SyncStatus> {
+        const recievedData = await fetch('https://totp-app.blobbybilb.workers.dev/get/' + token)
         const data = await decryptData(password, await recievedData.text())
 
         const encryptedData = await encryptData(PIN, data)
@@ -41,11 +25,7 @@ export abstract class DefaultRemote extends TemplateRemote {
         return SyncStatus.Success
     }
 
-    public static async setData(
-        token: string,
-        password: string,
-        PIN: string
-    ): Promise<SyncStatus> {
+    public static async setData(token: string, password: string, PIN: string): Promise<SyncStatus> {
         const localData = localStorage.getItem('data')
         if (localData === null) return SyncStatus.NoData
 
