@@ -5,7 +5,7 @@
     // import * as data from './lib/data'
     import { verifyLocalData, initLocalData, getLocalData } from './lib/localdata'
 
-    let totpdisplay: Totpdisplay
+    let totpdisplay
 
     const PIN: string = 'blob'
     // const PIN: string = prompt('Enter PIN')

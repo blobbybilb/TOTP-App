@@ -5,9 +5,7 @@
     let shownTOTP = '--- ---'
     let shownTimer = 0
     let shownAccount = '-'
-    let totp
-    // @ts-ignore
-    const TOTP = OTPAuth.TOTP
+    let totp: TOTP
     const getTimeUntilTOTPChange = () => 30 - (Number(new Date().getSeconds()) % 30)
 
     export function setKey(token: TOTPAccount) {
