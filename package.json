@@ -8,7 +8,8 @@
         "build": "vite build",
         "preview": "vite preview",
         "sw": "npx workbox generateSW workbox-config.cjs",
-        "bake": "npm run build && npm run sw && npm run preview"
+        "bake": "npm run build && npm run sw && npm run preview",
+        "check": "svelte-check --tsconfig ./tsconfig.json"
     },
     "devDependencies": {
         "@sveltejs/vite-plugin-svelte": "^1.0.2",

@@ -1,5 +1,5 @@
 import { encryptData, decryptData } from './encryption'
-import { Data } from './types'
+import type { Data } from './types'
 
 export enum SyncStatus {
     Success,
