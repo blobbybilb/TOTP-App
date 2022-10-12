@@ -1,5 +1,5 @@
-import { encryptData, decryptData } from './encryption'
 import { Data } from './types'
+import { encryptData, decryptData } from './encryption'
 
 export enum DataStatus {
     Success,
