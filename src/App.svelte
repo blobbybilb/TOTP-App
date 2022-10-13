@@ -1,11 +1,11 @@
 <script lang="ts">
-    import Account from './lib/Account.svelte'
-    import Titlebar from './lib/Titlebar.svelte'
-    import Totpdisplay from './lib/Totpdisplay.svelte'
+    import Account from './lib/components/Account.svelte'
+    import Titlebar from './lib/components/Titlebar.svelte'
+    import Totpdisplay from './lib/components/Totpdisplay.svelte'
     // import * as data from './lib/data'
     import { verifyLocalData, initLocalData, getLocalData } from './lib/localdata'
 
-    let totpdisplay
+    let totpdisplay: Totpdisplay
 
     const PIN: string = 'blob'
     // const PIN: string = prompt('Enter PIN')

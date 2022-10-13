@@ -1,5 +1,5 @@
 <script lang="ts">
-    import * as data from './data'
+    import * as data from '../data'
     export let PIN: string
     const randomToken = () =>
         Math.random().toString(36).substring(2) + Math.random().toString(36).substring(2)

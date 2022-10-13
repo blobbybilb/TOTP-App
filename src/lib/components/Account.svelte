@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { TOTPAccount } from './types'
+    import type { TOTPAccount } from '../types'
     export let token: TOTPAccount
     export let setKey: Function
 </script>

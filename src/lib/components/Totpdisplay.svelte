@@ -1,6 +1,6 @@
 <script lang="ts">
-    import type { TOTPAccount } from './types'
-    import { TOTP } from '../assets/otpauth.esm'
+    import type { TOTPAccount } from '../types'
+    import { TOTP } from '../../assets/otpauth.esm'
 
     let shownTOTP = '--- ---'
     let shownTimer = 0
