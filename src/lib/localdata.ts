@@ -44,3 +44,5 @@ export abstract class DefaultLocalStorage extends TemplateStorage {
         return DataStatus.Success
     }
 }
+
+// TODO data validation and proper functions

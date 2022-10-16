@@ -8,3 +8,5 @@ export async function encryptData(password: string, data: Data): Promise<string>
 export async function decryptData(password: string, data: string): Promise<Data> {
     return await passworder.decrypt(password, data)
 }
+
+// TODO add functions for encrypting/decrypting string
