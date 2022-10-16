@@ -1,0 +1,6 @@
+// localstorage structure
+{
+    "remoteToken": "encrypted token",
+    "password": "encrypted password",
+    "data": ["encrypted data"]
+}

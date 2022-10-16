@@ -1,7 +1,7 @@
-import passworder from '../assets/passworder.js'
+import passworder from '../../assets/passworder.js'
 import type { Data } from './types'
 
-export async function encryptData(password: string, data: Array<Object>): Promise<string> {
+export async function encryptData(password: string, data: Data): Promise<string> {
     return await passworder.encrypt(password, data)
 }
 

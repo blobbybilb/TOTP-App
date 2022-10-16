@@ -1,19 +1,15 @@
 <script lang="ts">
-    import type { TOTPAccount } from '../types'
-    import { TOTP } from '../../assets/otpauth.esm'
+    import type { TOTPAccount } from '../core/types'
+    import { getTimeUntilTOTPChange, newTOTP } from '../core/totp'
+    import type { TOTP } from '../../assets/otpauth.esm'
 
     let shownTOTP = '--- ---'
     let shownTimer = 0
     let shownAccount = '-'
     let totp: TOTP
-    const getTimeUntilTOTPChange = () => 30 - (Number(new Date().getSeconds()) % 30)
 
-    export function setKey(token: TOTPAccount) {
-        totp = new TOTP({
-            digits: 6,
-            period: 30,
-            secret: token.key,
-        })
+    export function setKey(token: TOTPAccount): void {
+        totp = newTOTP(token.key)
         shownAccount = token.name
         updateDisplay()
     }
@@ -25,9 +21,7 @@
         shownTimer = getTimeUntilTOTPChange()
     }
 
-    setInterval(() => {
-        updateDisplay()
-    }, 1000)
+    setInterval(updateDisplay, 1000)
 </script>
 
 <main>

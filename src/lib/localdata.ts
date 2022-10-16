@@ -1,50 +1,46 @@
-import type { Data } from './types'
-import { encryptData, decryptData } from './encryption'
+import type { Data } from './core/types'
+import { encryptData, decryptData } from './core/encryption'
+import { DataStatus, TemplateStorage } from './core/storages'
 
-export enum DataStatus {
-    Success,
-    Error,
-    NoData,
-    InvalidData,
-}
+export abstract class DefaultLocalStorage extends TemplateStorage {
+    public static async getData(PIN: string): Promise<[DataStatus, Data | null]> {
+        const data = localStorage.getItem('data')
+        if (data === null) return [DataStatus.NoData, null]
+        return [DataStatus.Success, await decryptData(PIN, data)]
+    }
 
-export async function getLocalData(PIN: string): Promise<[DataStatus, Data | null]> {
-    const data = localStorage.getItem('data')
-    if (data === null) return [DataStatus.NoData, null]
-    return [DataStatus.Success, await decryptData(PIN, data)]
-}
+    public static async setData(PIN: string, data: Data): Promise<DataStatus> {
+        const encryptedData = await encryptData(PIN, data)
+        localStorage.setItem('data', encryptedData)
+        return DataStatus.Success
+    }
 
-export async function setLocalData(PIN: string, data: Array<Object>): Promise<DataStatus> {
-    const encryptedData = await encryptData(PIN, data)
-    localStorage.setItem('data', encryptedData)
-    return DataStatus.Success
-}
+    public static async addAccount(PIN: string, name: string, secret: string): Promise<DataStatus> {
+        const [status, data] = await this.getData(PIN)
+        if (!(status === DataStatus.Success)) return status
+        data!.push({ name: name, key: secret })
+        return await this.setData(PIN, data!)
+    }
 
-export async function addAccount(PIN: string, name: string, secret: string): Promise<DataStatus> {
-    const [status, data] = await getLocalData(PIN)
-    if (!(status === DataStatus.Success)) return status
-    data!.push({ name: name, key: secret })
-    return await setLocalData(PIN, data!)
-}
+    public static async removeAccount(PIN: string, name: string): Promise<DataStatus> {
+        const [status, data] = await this.getData(PIN)
+        if (!(status === DataStatus.Success)) return status
+        const newData: Data = data!.filter((account) => account.name !== name)
+        return await this.setData(PIN, newData)
+    }
 
-export async function removeAccount(PIN: string, name: string): Promise<DataStatus> {
-    const [status, data] = await getLocalData(PIN)
-    if (!(status === DataStatus.Success)) return status
-    const newData = data!.filter((account) => account.name !== name)
-    return await setLocalData(PIN, newData)
-}
+    public static verifyLocalData(): boolean {
+        // TODO verify local data
+        return localStorage.getItem('data') !== null
+    }
 
-export function verifyLocalData(): boolean {
-    // TODO verify local data
-    return localStorage.getItem('data') !== null
-}
+    public static clearLocalData(): DataStatus {
+        localStorage.removeItem('data')
+        return DataStatus.Success
+    }
 
-export function clearLocalData(): DataStatus {
-    localStorage.removeItem('data')
-    return DataStatus.Success
-}
-
-export function initLocalData(PIN: string): DataStatus {
-    setLocalData(PIN, []) // TODO ask to add account
-    return DataStatus.Success
+    public static initLocalData(PIN: string): DataStatus {
+        this.setData(PIN, []) // TODO ask to add account
+        return DataStatus.Success
+    }
 }

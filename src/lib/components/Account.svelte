@@ -1,10 +1,14 @@
 <script lang="ts">
-    import type { TOTPAccount } from '../types'
+    import type { TOTPAccount } from '../core/types'
     export let token: TOTPAccount
     export let setKey: Function
+
+    function activate() {
+        setKey(token)
+    }
 </script>
 
-<main on:click={() => setKey(token)}>
+<main on:click={activate}>
     <p>{token.name}</p>
 </main>
 
