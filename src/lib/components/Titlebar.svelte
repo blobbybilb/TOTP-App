@@ -1,6 +1,6 @@
 <script lang="ts">
     import { randomSecret } from '../core/totp'
-    import { DefaultLocalStorage } from '../localdata'
+    import { DefaultStorage } from '../storage'
 
     import { DefaultSync } from '../sync'
 
@@ -24,7 +24,7 @@
     function addAccount() {
         const name = prompt('Enter account name')
         const key = prompt('Enter account key')
-        DefaultLocalStorage.addAccount(PIN, name, key)
+        DefaultStorage.addAccount(PIN, name, key)
     }
 </script>
 

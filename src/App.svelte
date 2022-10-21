@@ -3,15 +3,15 @@
     import Totpdisplay from './lib/components/Totpdisplay.svelte'
     import Account from './lib/components/Account.svelte'
 
-    import { DefaultLocalStorage } from './lib/localdata'
+    import { DefaultStorage } from './lib/storage'
 
     let totpdisplay: Totpdisplay
 
     const PIN: string = 'blob'
     // const PIN: string = prompt('Enter PIN')
 
-    if (!DefaultLocalStorage.verifyLocalData()) {
-        DefaultLocalStorage.initLocalData(PIN)
+    if (!DefaultStorage.verifyLocalData()) {
+        DefaultStorage.initLocalData(PIN)
     }
 </script>
 
@@ -21,7 +21,7 @@
         <Totpdisplay bind:this={totpdisplay} />
     </div>
     <div id="maingrid">
-        {#await DefaultLocalStorage.getData(PIN) then [_, tokenData]}
+        {#await DefaultStorage.getData(PIN) then [_, tokenData]}
             {#each tokenData as token}
                 <Account {token} setKey={totpdisplay?.setKey} />
             {/each}

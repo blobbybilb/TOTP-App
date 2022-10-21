@@ -1,11 +1,4 @@
-import type { Data } from './types'
-
-export enum DataStatus {
-    Success,
-    Error,
-    NoData,
-    InvalidData,
-}
+import type { Data, DataStatus } from './types'
 
 export abstract class TemplateStorage {
     abstract getData(PIN: string): Promise<[DataStatus, Data | null]>

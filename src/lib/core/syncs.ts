@@ -1,5 +1,5 @@
-import type { SyncStatus } from './remotes'
+import type { DataStatus } from './types'
 
 export abstract class TemplateSync {
-    abstract syncData(PIN: string, encryptedToken: string, encryptedPassword: string): Promise<SyncStatus>
+    abstract syncData(PIN: string, encryptedToken: string, encryptedPassword: string): Promise<DataStatus>
 }

@@ -1,8 +1,9 @@
 import type { Data } from './core/types'
 import { encryptData, decryptData } from './core/encryption'
-import { DataStatus, TemplateStorage } from './core/storages'
+import { TemplateStorage } from './core/storages'
+import { DataStatus } from './core/types'
 
-export abstract class DefaultLocalStorage extends TemplateStorage {
+export abstract class DefaultStorage extends TemplateStorage {
     public static async getData(PIN: string): Promise<[DataStatus, Data | null]> {
         const data = localStorage.getItem('data')
         if (data === null) return [DataStatus.NoData, null]
@@ -25,7 +26,7 @@ export abstract class DefaultLocalStorage extends TemplateStorage {
     public static async removeAccount(PIN: string, name: string): Promise<DataStatus> {
         const [status, data] = await this.getData(PIN)
         if (!(status === DataStatus.Success)) return status
-        const newData: Data = data!.filter((account) => account.name !== name)
+        const newData: Data = data!.filter((account) => account.name !== name) // TODO also check key
         return await this.setData(PIN, newData)
     }
 

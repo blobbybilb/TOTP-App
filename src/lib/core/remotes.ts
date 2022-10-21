@@ -1,33 +1,36 @@
 import { encryptData, decryptData } from './encryption'
 import type { Data } from './types'
-
-export enum SyncStatus {
-    Success,
-    Error,
-    NotFound,
-    NoData,
-}
+import { DataStatus } from './types'
 
 export abstract class TemplateRemote {
-    abstract getData(token: string, password: string, PIN: string): Promise<SyncStatus>
-    abstract setData(token: string, password: string, PIN: string): Promise<SyncStatus>
+    public abstract readonly remoteURLs: { get: string; set: string }
+
+    public abstract getData(token: string, password: string): Promise<[DataStatus, Data | null]>
+    public abstract setData(token: string, password: string, data: Data): Promise<DataStatus>
 }
 
 export abstract class DefaultRemote extends TemplateRemote {
-    public static async getData(token: string, password: string): Promise<[SyncStatus, Data | null]> {
-        const recievedData = await fetch('https://totp-app.blobbybilb.workers.dev/get/' + token)
-        const data = await decryptData(password, await recievedData.text())
-        return [SyncStatus.Success, data]
+    static readonly baseRemoteURL: string = 'https://totp-app.blobbybilb.workers.dev/'
+
+    public static readonly remoteURLs = {
+        get: this.baseRemoteURL + 'get/',
+        set: this.baseRemoteURL + 'set/',
     }
 
-    public static async setData(token: string, password: string, data: Data): Promise<SyncStatus> {
+    public static async getData(token: string, password: string): Promise<[DataStatus, Data | null]> {
+        const recievedData = await fetch(this.remoteURLs.get + token)
+        const data = await decryptData(password, await recievedData.text())
+        return [DataStatus.Success, data]
+    }
+
+    public static async setData(token: string, password: string, data: Data): Promise<DataStatus> {
         const encryptedData = await encryptData(password, data)
-        await fetch('https://totp-app.blobbybilb.workers.dev/set/' + token, {
+        await fetch(this.remoteURLs.set + token, {
             method: 'POST',
             body: encryptedData,
         })
 
-        return SyncStatus.Success
+        return DataStatus.Success
     }
 }
 
