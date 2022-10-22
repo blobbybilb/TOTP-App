@@ -1,7 +1,7 @@
-import type { Data } from './core/types'
-import { encryptData, decryptData } from './core/encryption'
-import { TemplateStorage } from './core/storages'
-import { DataStatus } from './core/types'
+import type { Data } from '../../../core/types'
+import { encryptData, decryptData } from '../../../core/encryption'
+import { TemplateStorage } from '../../../core/storages'
+import { DataStatus } from '../../../core/types'
 
 export abstract class DefaultStorage extends TemplateStorage {
     public static async getData(PIN: string): Promise<[DataStatus, Data | null]> {

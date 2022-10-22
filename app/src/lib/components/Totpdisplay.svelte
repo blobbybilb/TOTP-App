@@ -1,7 +1,7 @@
 <script lang="ts">
-    import type { TOTPAccount } from '../core/types'
-    import { getTimeUntilTOTPChange, newTOTP } from '../core/totp'
-    import type { TOTP } from '../../assets/otpauth.esm'
+    import type { TOTPAccount } from '../../../../core/types'
+    import { getTimeUntilTOTPChange, newTOTP } from '../../../../core/totp'
+    import type { TOTP } from '../../../../core/external/otpauth.esm'
 
     let shownTOTP = '--- ---'
     let shownTimer = 0

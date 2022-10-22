@@ -8,12 +8,6 @@
         <link rel="manifest" href="/manifest.json" />
         <link rel="apple-touch-icon" href="/lock.svg" />
         <meta name="theme-color" content="#ffffff" />
-        <script type="module">
-            import passworder from './src/assets/passworder.js'
-            import * as OTPAuth from './src/assets/otpauth.esm.js'
-            window.passworder = passworder
-            window.OTPAuth = OTPAuth
-        </script>
         <script>
             if ('serviceWorker' in navigator) {
                 navigator.serviceWorker.register('/sw.js')

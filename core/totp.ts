@@ -1,4 +1,4 @@
-import { TOTP } from '../../assets/otpauth.esm'
+import { TOTP } from './external/otpauth.esm'
 
 export function getTimeUntilTOTPChange(): number {
     const now = new Date()

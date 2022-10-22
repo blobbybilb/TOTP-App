@@ -1,3 +1,5 @@
+import type { TOTP } from './external/otpauth.esm'
+
 export type TOTPAccount = { name: string; key: string }
 export type Data = TOTPAccount[]
 
@@ -8,3 +10,5 @@ export enum DataStatus {
     NotFound,
     InvalidData,
 }
+
+export type TOTPGenerator = TOTP

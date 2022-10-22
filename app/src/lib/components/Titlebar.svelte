@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { randomSecret } from '../core/totp'
+    import { randomSecret } from '../../../../core/totp'
     import { DefaultStorage } from '../storage'
 
     import { DefaultSync } from '../sync'

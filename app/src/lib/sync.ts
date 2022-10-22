@@ -1,7 +1,7 @@
 import { DefaultStorage } from './storage'
-import { DefaultRemote } from './core/remotes'
-import { DataStatus } from './core/types'
-import { TemplateSync } from './core/syncs'
+import { DefaultRemote } from '../../../core/remotes'
+import { DataStatus } from '../../../core/types'
+import { TemplateSync } from '../../../core/syncs'
 
 export abstract class DefaultSync extends TemplateSync {
     public static async syncData(
