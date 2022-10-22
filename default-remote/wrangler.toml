@@ -1,0 +1,7 @@
+name = "totp"
+main = "src/index.ts"
+compatibility_date = "2022-10-22"
+
+kv_namespaces = [
+  { binding = "kv", id = "4cd4cf5eada249668d4191b4ffe72cb7", preview_id = "fc481519d6474727a6772602f603c3c0"}
+]

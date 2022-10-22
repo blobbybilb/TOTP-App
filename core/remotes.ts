@@ -1,12 +1,12 @@
 import { encryptData, decryptData } from './encryption'
 import type { Data } from './types'
-import { DataStatus } from './types'
+import { RemoteStatus } from './types'
 
 export abstract class TemplateRemote {
     public abstract readonly remoteURLs: { get: string; set: string }
 
-    public abstract getData(token: string, password: string): Promise<[DataStatus, Data | null]>
-    public abstract setData(token: string, password: string, data: Data): Promise<DataStatus>
+    public abstract getData(token: string, password: string): Promise<[RemoteStatus, Data | null]>
+    public abstract setData(token: string, password: string, data: Data): Promise<RemoteStatus>
 }
 
 export abstract class DefaultRemote extends TemplateRemote {
@@ -17,20 +17,20 @@ export abstract class DefaultRemote extends TemplateRemote {
         set: this.baseRemoteURL + 'set/',
     }
 
-    public static async getData(token: string, password: string): Promise<[DataStatus, Data | null]> {
+    public static async getData(token: string, password: string): Promise<[RemoteStatus, Data | null]> {
         const recievedData = await fetch(this.remoteURLs.get + token)
         const data = await decryptData(password, await recievedData.text())
-        return [DataStatus.Success, data]
+        return [RemoteStatus.Success, data]
     }
 
-    public static async setData(token: string, password: string, data: Data): Promise<DataStatus> {
+    public static async setData(token: string, password: string, data: Data): Promise<RemoteStatus> {
         const encryptedData = await encryptData(password, data)
         await fetch(this.remoteURLs.set + token, {
             method: 'POST',
             body: encryptedData,
         })
 
-        return DataStatus.Success
+        return RemoteStatus.Success
     }
 }
 
