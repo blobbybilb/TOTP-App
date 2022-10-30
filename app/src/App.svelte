@@ -1,7 +1,8 @@
 <script lang="ts">
     import Titlebar from './lib/components/Titlebar.svelte'
-    import Totpdisplay from './lib/components/Totpdisplay.svelte'
+    import Totpdisplay from './lib/components/Totpdisplay.svelte' // FIXME
     import Account from './lib/components/Account.svelte'
+    import AccountsContainer from './lib/components/AccountsContainer.svelte'
 
     import { DefaultStorage } from './lib/storage'
 
@@ -17,30 +18,24 @@
 
 <main>
     <Titlebar {PIN} />
-    <div id="totpdisplay">
-        <Totpdisplay bind:this={totpdisplay} />
-    </div>
-    <div id="maingrid">
+    <Totpdisplay bind:this={totpdisplay} />
+    <AccountsContainer />
+
+    <!-- <div id="maingrid">
         {#await DefaultStorage.getData(PIN) then [_, tokenData]}
             {#each tokenData as token}
                 <Account {token} setKey={totpdisplay?.setKey} />
             {/each}
         {/await}
     </div>
-    <!-- <Config id="config" /> -->
+    -->
 </main>
 
 <style>
-    main {
-        width: 98vw;
-        max-width: 600px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    #maingrid {
+    /* #maingrid {
         margin-top: 2vh;
         display: grid;
         grid-template: auto / auto;
         row-gap: 2vh;
-    }
+    } */
 </style>

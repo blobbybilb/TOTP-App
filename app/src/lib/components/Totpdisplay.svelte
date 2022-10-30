@@ -25,24 +25,32 @@
 </script>
 
 <main>
-    <p id="timer">{shownAccount}</p>
+    <p id="account">{shownAccount}</p>
     <p id="otp">{shownTOTP}</p>
     <p id="timer">{shownTimer}</p>
-    <hr />
 </main>
 
 <style>
-    * {
-        background-color: var(--main-background-color);
+    main {
+        --spacing: 15px;
+        text-align: center;
+        width: 100%;
+        margin-top: calc(var(--spacing));
+    }
+
+    #account {
+        font-size: 1.2em;
+        margin: 0;
     }
     #otp {
         font-weight: 300;
-        text-align: center;
-        margin-top: 2vh;
-        margin-bottom: 1vh;
         font-size: 3em;
+        margin: 0;
+        margin-top: var(--spacing);
     }
     #timer {
         text-align: center;
+        margin: 0;
+        margin-top: var(--spacing);
     }
 </style>

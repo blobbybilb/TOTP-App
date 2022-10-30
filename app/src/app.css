@@ -5,11 +5,23 @@
   --main-color: rgb(0, 0, 0);
   --accent-color: rgb(255, 255, 255);
   --secondary-color: rgb(0, 0, 0);
+  --titlebar-height: 36px;
   font-family: 'Trebuchet MS', sans-serif;
+  color: var(--main-color);
   background-color: var(--main-background-color);
 }
 
+body {
+  margin: 0;
+  overflow: hidden;
+}
 
+main {
+  width: calc(100vw - 12px);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 /* dark theme */
 @media (prefers-color-scheme: dark) {
@@ -21,13 +33,4 @@
     --accent-color: rgb(0, 0, 0);
     --secondary-color: rgb(255, 255, 255);
   }
-}
-
-* {
-  color: var(--main-color);
-  background-color: var(--main-background-color);
-}
-
-hr {
-  border: 1px solid var(--accent-background-color);
 }

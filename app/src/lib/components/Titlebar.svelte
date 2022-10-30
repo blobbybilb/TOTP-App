@@ -29,23 +29,26 @@
 </script>
 
 <main>
-    <h1>TOTP App</h1>
-    <span on:click={tokenPrompt}>config</span>
+    <p>TOTP App</p>
+    <!-- <span on:click={tokenPrompt}>config</span>
     <span on:click={sync}>sync</span>
-    <!-- <span on:click={save}>save</span> -->
-    <span on:click={addAccount}>add</span>
+    <span on:click={addAccount}>add</span> -->
 </main>
-<hr />
 
 <style>
-    h1 {
+    main {
         text-align: center;
+        background-color: var(--accent-background-color);
         width: 100%;
-        margin-top: 2vh;
-        margin-bottom: 2vh;
-        display: inline-block;
+        margin-top: -20px;
+        padding-top: 30px;
+        border-radius: 10px;
+        height: var(--titlebar-height);
+        outline: 3px solid var(--accent-background-color);
+        outline-offset: 3px;
     }
-    span {
-        display: inline;
+    p {
+        margin: 0;
+        font-size: 1.4em;
     }
 </style>

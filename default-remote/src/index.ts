@@ -58,7 +58,7 @@ async function timeoutCheck(ip: string, write: boolean): Promise<boolean> {
 async function getData(token: string, env: Env): Promise<Response> {
     const data = await env.kv.get(token)
     if (data === null) return createResponse(RemoteStatus.NoData)
-    return createResponse(data!)
+    return createResponse(RemoteStatus.Success + data)
 }
 
 async function setData(token: string, env: Env, data: string): Promise<Response> {
