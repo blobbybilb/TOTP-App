@@ -3,8 +3,10 @@
   --accent-background-color: rgb(201, 201, 201);
 
   --main-color: rgb(0, 0, 0);
-  --accent-color: rgb(255, 255, 255);
+  --accent-color: rgb(212, 212, 212);
   --secondary-color: rgb(0, 0, 0);
+
+
   --titlebar-height: 36px;
   font-family: 'Trebuchet MS', sans-serif;
   color: var(--main-color);
