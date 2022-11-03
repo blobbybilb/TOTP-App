@@ -34,14 +34,12 @@
 <style>
     main {
         text-align: center;
-        /* outline: 3px solid var(--accent-background-color); */
         margin-top: 25px;
         width: 100%;
         height: calc(100vh - 190px);
         display: block;
         border-radius: 10px;
         overflow: hidden;
-        outline-offset: 3px;
         box-shadow: 0 0 0 3px var(--main-background-color), 0 0 0 6px var(--accent-background-color);
     }
 

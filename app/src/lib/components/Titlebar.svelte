@@ -47,8 +47,7 @@
         padding-top: 30px;
         border-radius: 10px;
         height: var(--titlebar-height);
-        /* outline: 3px solid var(--accent-background-color); */
-        outline-offset: 3px;
+        box-shadow: 0 0 0 3px var(--main-background-color), 0 0 0 6px var(--accent-background-color);
     }
     div#grid {
         display: grid;

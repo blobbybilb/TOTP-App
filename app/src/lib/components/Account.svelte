@@ -20,9 +20,8 @@
         max-width: 300px;
         width: 70%;
         border-radius: 10px;
-        outline: 3px solid var(--accent-background-color);
+        box-shadow: 0 0 0 3px var(--main-background-color), 0 0 0 6px var(--accent-background-color);
         background-color: var(--accent-background-color);
-        outline-offset: 2px;
         border: none;
         margin-top: 30px;
         color: var(--main-color);
