@@ -12,22 +12,9 @@
     <p>{token.name}</p>
 </main> -->
 
-<button />
+<button>Hello</button>
 
 <style>
-    /* p {
-        font-weight: 300;
-        text-align: center;
-        font-size: 2em;
-        border: 1px solid var(--accent-background-color);
-        /* background-color: var(--accent-background-color); */
-    /* width: 60%;
-        margin: auto;
-        padding-top: 1vh;
-        padding-bottom: 1vh;
-        border-radius: 10px;
-    }  */
-
     button {
         height: 40px;
         max-width: 300px;
@@ -37,6 +24,8 @@
         background-color: var(--accent-background-color);
         outline-offset: 2px;
         border: none;
-        margin-top: 25px;
+        margin-top: 30px;
+        color: var(--main-color);
+        font-size: medium;
     }
 </style>

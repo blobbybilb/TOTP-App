@@ -1,6 +1,9 @@
 <script lang="ts">
     import { randomSecret } from '../../../../core/totp'
     import { DefaultStorage } from '../storage'
+    import syncIcon from '../../assets/sync-outline.svg'
+    import settingsIcon from '../../assets/settings-outline.svg'
+    import { keybind } from '../ui'
 
     import { DefaultSync } from '../sync'
 
@@ -13,7 +16,6 @@
             'Enter an existing token or use the randomly generated one.',
             localStorage.getItem('remoteToken') ?? randomSecret()
         )
-
         localStorage.setItem('remoteToken', token)
     }
 
@@ -29,10 +31,11 @@
 </script>
 
 <main>
-    <p>TOTP App</p>
-    <!-- <span on:click={tokenPrompt}>config</span>
-    <span on:click={sync}>sync</span>
-    <span on:click={addAccount}>add</span> -->
+    <div id="grid">
+        <img src={syncIcon} on:click={sync} on:keypress={keybind} alt="sync" />
+        <p>yAuth</p>
+        <img src={settingsIcon} alt="settings" />
+    </div>
 </main>
 
 <style>
@@ -44,8 +47,14 @@
         padding-top: 30px;
         border-radius: 10px;
         height: var(--titlebar-height);
-        outline: 3px solid var(--accent-background-color);
+        /* outline: 3px solid var(--accent-background-color); */
         outline-offset: 3px;
+    }
+    div#grid {
+        display: grid;
+        margin-left: 10px;
+        margin-right: 10px;
+        grid-template: 100% / 25px auto 25px;
     }
     p {
         margin: 0;

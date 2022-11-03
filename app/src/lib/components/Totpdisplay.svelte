@@ -2,8 +2,9 @@
     import type { TOTPAccount } from '../../../../core/types'
     import { getTimeUntilTOTPChange, newTOTP } from '../../../../core/totp'
     import type { TOTP } from '../../../../core/external/otpauth.esm'
+    import copyIcon from '../../assets/copy-outline.svg'
 
-    let shownTOTP = '--- ---'
+    let shownTOTP = '123 123'
     let shownTimer = 0
     let shownAccount = '-'
     let totp: TOTP
@@ -27,6 +28,7 @@
 <main>
     <p id="account">{shownAccount}</p>
     <p id="otp">{shownTOTP}</p>
+    <img src={copyIcon} alt="copy" />
     <p id="timer">{shownTimer}</p>
 </main>
 
@@ -52,5 +54,10 @@
         text-align: center;
         margin: 0;
         margin-top: var(--spacing);
+    }
+    img {
+        height: 25px;
+        filter: var(--img-filter);
+        margin-top: 10px;
     }
 </style>

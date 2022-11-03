@@ -1,9 +1,16 @@
 <script lang="ts">
     import Account from './Account.svelte'
+    import qrIcon from '../../assets/qr-code-outline.svg'
+    import plusIcon from '../../assets/add-outline.svg'
 </script>
 
 <main>
-    <div id="topbar" />
+    <div id="topbar">
+        <div id="grid">
+            <img src={qrIcon} alt="scan" />
+            <img src={plusIcon} alt="add" />
+        </div>
+    </div>
     <div id="container">
         <Account />
         <Account />
@@ -27,7 +34,7 @@
 <style>
     main {
         text-align: center;
-        outline: 3px solid var(--accent-background-color);
+        /* outline: 3px solid var(--accent-background-color); */
         margin-top: 25px;
         width: 100%;
         height: calc(100vh - 190px);
@@ -35,6 +42,7 @@
         border-radius: 10px;
         overflow: hidden;
         outline-offset: 3px;
+        box-shadow: 0 0 0 3px var(--main-background-color), 0 0 0 6px var(--accent-background-color);
     }
 
     #topbar {
@@ -44,11 +52,23 @@
 
     #container {
         overflow-y: auto;
+        scrollbar-width: thin;
+        scrollbar-gutter: stable both-edges;
         height: 100%;
         width: 100%;
     }
 
     #bottom-padding {
         height: 100px;
+    }
+
+    #grid {
+        display: block;
+        padding-top: 15px;
+        width: 100%;
+    }
+
+    img {
+        margin: 0 10px;
     }
 </style>
