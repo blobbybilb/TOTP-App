@@ -1,4 +1,4 @@
-import { Application, Router } from "https://deno.land/x/oak/mod.ts"
+import { Application, Router } from "https://deno.land/x/oak@v11.1.0/mod.ts"
 import { RemoteStatus } from "../core/types.ts"
 
 const router = new Router()
@@ -35,7 +35,7 @@ const app = new Application()
 app.use(router.routes())
 app.use(router.allowedMethods())
 
-app.addEventListener("listen", (e) =>
+app.addEventListener("listen", () =>
     console.log("Listening on http://localhost:8080")
 )
 await app.listen({ port: 8080 })

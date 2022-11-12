@@ -22,19 +22,13 @@
     function sync() {
         DefaultSync.syncData(PIN, localStorage.getItem('remoteToken'), password)
     }
-
-    function addAccount() {
-        const name = prompt('Enter account name')
-        const key = prompt('Enter account key')
-        DefaultStorage.addAccount(PIN, name, key)
-    }
 </script>
 
 <main>
     <div id="grid">
         <img src={syncIcon} on:click={sync} on:keypress={keybind} alt="sync" />
         <p>yAuth</p>
-        <img src={settingsIcon} alt="settings" />
+        <img src={settingsIcon} on:click={tokenPrompt} on:keypress={keybind} alt="settings" />
     </div>
 </main>
 

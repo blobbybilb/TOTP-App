@@ -2,13 +2,21 @@
     import Account from './Account.svelte'
     import qrIcon from '../../assets/qr-code-outline.svg'
     import plusIcon from '../../assets/add-outline.svg'
+    import { DefaultStorage } from '../storage'
+    export let PIN: string
+
+    function addAccount() {
+        const name = prompt('Enter account name')
+        const key = prompt('Enter account key')
+        DefaultStorage.addAccount(PIN, name, key)
+    }
 </script>
 
 <main>
     <div id="topbar">
         <div id="grid">
             <img src={qrIcon} alt="scan" />
-            <img src={plusIcon} alt="add" />
+            <img src={plusIcon} alt="add" on:click={addAccount} on:keypress />
         </div>
     </div>
     <div id="container">
@@ -57,7 +65,7 @@
     }
 
     #bottom-padding {
-        height: 100px;
+        height: 150px;
     }
 
     #grid {
