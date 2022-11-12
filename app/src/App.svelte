@@ -2,10 +2,11 @@
     import Titlebar from './lib/components/Titlebar.svelte'
     import Totpdisplay from './lib/components/Totpdisplay.svelte' // FIXME
     import AccountsContainer from './lib/components/AccountsContainer.svelte'
+    import type { TOTPAccount } from '../../core/types'
 
     import { DefaultStorage } from './lib/storage'
 
-    let totpdisplay: Totpdisplay
+    let setTOTPDisplay: (token: TOTPAccount) => void // TODO replace this with a type
 
     const PIN: string = 'blob'
     // const PIN: string = prompt('Enter PIN')
@@ -17,8 +18,8 @@
 
 <main>
     <Titlebar {PIN} />
-    <Totpdisplay bind:this={totpdisplay} />
-    <AccountsContainer />
+    <Totpdisplay bind:setKey={setTOTPDisplay} />
+    <AccountsContainer {PIN} {setTOTPDisplay} />
 </main>
 
 <style>

@@ -11,7 +11,7 @@ export abstract class DefaultSync extends TemplateSync {
     ): Promise<[SyncStatus, [RemoteStatus, StorageStatus]]> {
         const [, remoteData] = await DefaultRemote.getData(token, password)
         const [, localData] = await DefaultStorage.getData(PIN)
-        const merged = [...remoteData!, ...localData!]
+        const merged = [...(remoteData!), ...(localData!)]
 
         const existingNames: string[] = []
         const deduplicated = merged.filter((value) => {

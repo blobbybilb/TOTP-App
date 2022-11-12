@@ -3,7 +3,10 @@
     import qrIcon from '../../assets/qr-code-outline.svg'
     import plusIcon from '../../assets/add-outline.svg'
     import { DefaultStorage } from '../storage'
+    import type { TOTPAccount } from '../../../../core/types'
+
     export let PIN: string
+    export let setTOTPDisplay: (token: TOTPAccount) => void
 
     function addAccount() {
         const name = prompt('Enter account name')
@@ -20,21 +23,11 @@
         </div>
     </div>
     <div id="container">
-        <Account />
-        <Account />
-        <Account />
-        <Account />
-        <Account />
-        <Account />
-        <Account />
-        <Account />
-        <Account />
-        <Account />
-        <Account />
-        <Account />
-        <Account />
-        <Account />
-        <Account />
+        {#await DefaultStorage.getData(PIN) then tokens}
+            {#each tokens[1] as token}
+                <Account {token} {setTOTPDisplay} />
+            {/each}
+        {/await}
         <div id="bottom-padding" />
     </div>
 </main>

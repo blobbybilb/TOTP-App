@@ -1,6 +1,8 @@
 <script lang="ts">
-    // import type { TOTPAccount } from '../../../../core/types'
-    // export let token: TOTPAccount
+    import type { TOTPAccount } from '../../../../core/types'
+    export let token: TOTPAccount
+    export let setTOTPDisplay: (token: TOTPAccount) => void
+
     // export let setKey: Function
 
     // function activate() {
@@ -12,7 +14,7 @@
     <p>{token.name}</p>
 </main> -->
 
-<button>Hello</button>
+<button>{token.name}</button>
 
 <style>
     button {
