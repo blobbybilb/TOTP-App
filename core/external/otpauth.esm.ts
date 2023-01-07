@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /*! otpauth v8.0.3 | (c) Héctor Molinero Fernández <hector@molinero.dev> | MIT | https://github.com/hectorm/otpauth */
 /*! jssha v3.2.0 | (c) Brian Turek <brian.turek@gmail.com> | BSD-3-Clause | https://github.com/Caligatio/jsSHA */
 

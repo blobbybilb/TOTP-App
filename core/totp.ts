@@ -7,6 +7,7 @@ export function getTimeUntilTOTPChange(): number {
 }
 
 export function newTOTP(secret: string): TOTPGenerator {
+    // @ts-ignore
     return new TOTP({
         digits: 6,
         period: 30,

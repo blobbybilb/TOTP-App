@@ -8,10 +8,22 @@
 
 
   --titlebar-height: 36px;
-  --img-filter: invert(80%);
+  --img-filter: invert(20%);
   font-family: 'Trebuchet MS', sans-serif;
   color: var(--main-color);
   background-color: var(--main-background-color);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --main-background-color: rgb(0, 0, 0);
+    --accent-background-color: rgb(40, 40, 40);
+
+    --main-color: rgb(255, 255, 255);
+    --accent-color: rgb(0, 0, 0);
+    --secondary-color: rgb(255, 255, 255);
+    --img-filter: invert(80%);
+  }
 }
 
 body {
@@ -27,19 +39,7 @@ main {
 }
 
 img {
-  height: 20px;
+  height: 23px;
   filter: var(--img-filter);
   margin: auto;
-}
-
-/* dark theme */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --main-background-color: rgb(0, 0, 0);
-    --accent-background-color: rgb(40, 40, 40);
-
-    --main-color: rgb(255, 255, 255);
-    --accent-color: rgb(0, 0, 0);
-    --secondary-color: rgb(255, 255, 255);
-  }
 }

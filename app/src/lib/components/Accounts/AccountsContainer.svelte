@@ -1,27 +1,22 @@
 <script lang="ts">
+    import Topbar from './Topbar.svelte'
     import Account from './Account.svelte'
-    import qrIcon from '../../assets/qr-code-outline.svg'
-    import plusIcon from '../../assets/add-outline.svg'
-    import { DefaultStorage } from '../storage'
-    import type { TOTPAccount } from '../../../../core/types'
+    import { DefaultStorage } from '../../storage'
+    import type { TOTPAccount } from '../../../../../core/types'
+    import { refreshAccountsContainer } from '../../stores'
 
     export let PIN: string
     export let setTOTPDisplay: (token: TOTPAccount) => void
 
-    function addAccount() {
-        const name = prompt('Enter account name')
-        const key = prompt('Enter account key')
-        DefaultStorage.addAccount(PIN, name, key)
-    }
+    let refresher: number
+
+    refreshAccountsContainer.subscribe((value) => {
+        refresher = value
+    })
 </script>
 
 <main>
-    <div id="topbar">
-        <div id="grid">
-            <img src={qrIcon} alt="scan" />
-            <img src={plusIcon} alt="add" on:click={addAccount} on:keypress />
-        </div>
-    </div>
+    <Topbar {PIN} />
     <div id="container">
         {#await DefaultStorage.getData(PIN) then tokens}
             {#each tokens[1] as token}
@@ -44,11 +39,6 @@
         box-shadow: 0 0 0 3px var(--main-background-color), 0 0 0 6px var(--accent-background-color);
     }
 
-    #topbar {
-        height: 50px;
-        background-color: var(--accent-background-color);
-    }
-
     #container {
         overflow-y: auto;
         scrollbar-width: thin;
@@ -59,15 +49,5 @@
 
     #bottom-padding {
         height: 150px;
-    }
-
-    #grid {
-        display: block;
-        padding-top: 15px;
-        width: 100%;
-    }
-
-    img {
-        margin: 0 10px;
     }
 </style>

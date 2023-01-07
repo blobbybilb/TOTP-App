@@ -42,6 +42,7 @@ export abstract class DefaultRemote extends TemplateRemote {
 
     public static async setData(token: string, password: string, data: Data): Promise<RemoteStatus> {
         const encryptedData = await encryptData(password, data)
+
         const recievedData = await (
             await fetch(this.remoteURLs.set + token, {
                 method: 'POST',

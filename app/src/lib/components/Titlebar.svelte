@@ -6,29 +6,40 @@
     import { keybind } from '../ui'
 
     import { DefaultSync } from '../sync'
+    import { refreshAccountsContainer } from '../stores'
 
     export let PIN: string
 
-    const password = 'test'
+    let password = null
 
     function tokenPrompt() {
         const token = prompt(
-            'Enter an existing token or use the randomly generated one.',
+            'Enter an existing sync token or use the randomly generated one.',
             localStorage.getItem('remoteToken') ?? randomSecret()
         )
-        localStorage.setItem('remoteToken', token)
+        if (token) localStorage.setItem('remoteToken', token)
     }
 
     function sync() {
+        password = prompt('Enter your sync encryption password.', password ?? '')
         DefaultSync.syncData(PIN, localStorage.getItem('remoteToken'), password)
+        refresh()
+    }
+
+    function refresh() {
+        refreshAccountsContainer.update((n) => n + 1)
     }
 </script>
 
 <main>
     <div id="grid">
-        <img src={syncIcon} on:click={sync} on:keypress={keybind} alt="sync" />
-        <p>yAuth</p>
-        <img src={settingsIcon} on:click={tokenPrompt} on:keypress={keybind} alt="settings" />
+        <div on:click={sync} on:keypress={keybind}>
+            <img src={syncIcon} alt="sync" />
+        </div>
+        <p>TOTP-App</p>
+        <div on:click={tokenPrompt} on:keypress={keybind}>
+            <img src={settingsIcon} alt="settings" />
+        </div>
     </div>
 </main>
 

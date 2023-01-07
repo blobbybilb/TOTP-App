@@ -3,6 +3,7 @@
     import { getTimeUntilTOTPChange, newTOTP } from '../../../../core/totp'
     import type { TOTP } from '../../../../core/external/otpauth.esm'
     import copyIcon from '../../assets/copy-outline.svg'
+    import { keybind } from '../ui'
 
     let shownTOTP = '123 123'
     let shownTimer = 0
@@ -22,13 +23,19 @@
         shownTimer = getTimeUntilTOTPChange()
     }
 
+    function copy() {
+        navigator.clipboard.writeText(shownTOTP)
+    }
+
     setInterval(updateDisplay, 1000)
 </script>
 
 <main>
     <p id="account">{shownAccount}</p>
     <p id="otp">{shownTOTP}</p>
-    <img src={copyIcon} alt="copy" />
+    <div on:click={copy} on:keypress={keybind}>
+        <img src={copyIcon} alt="copy" />
+    </div>
     <p id="timer">{shownTimer}</p>
 </main>
 
