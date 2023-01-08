@@ -2,6 +2,9 @@
 
 Goal: a free, open-source, cross-platform, authenticator app that supports E2EE sync
 
+Why: there don't seem to be any free, open-source, non-self hosted authenticators with E2EE sync, for some reason
+
+
 Status: **Pre-alpha, not yet useable, in active development**
 (everything is WIP, including the name)
 
