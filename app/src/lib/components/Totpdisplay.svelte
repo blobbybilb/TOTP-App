@@ -10,7 +10,7 @@
     let shownAccount = '-'
     let totp: TOTP
 
-    export function setKey(token: TOTPAccount): void {
+    export function set(token: TOTPAccount): void {
         totp = newTOTP(token.key)
         shownAccount = token.name
         updateDisplay()

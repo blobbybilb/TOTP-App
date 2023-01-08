@@ -5,17 +5,10 @@
 
     export let PIN: string
 
-    import { refreshAccountsContainer } from '../../stores'
-
-    function refresh() {
-        refreshAccountsContainer.update((n) => n + 1)
-    }
-
     function addAccount() {
         const name = prompt('Enter account name')
         const key = prompt('Enter account key')
         DefaultStorage.addAccount(PIN, name, key)
-        refresh()
     }
 </script>
 

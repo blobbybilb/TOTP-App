@@ -1,0 +1,13 @@
+{
+    "name": "totp-cli",
+    "version": "1.0.0",
+    "description": "",
+    "main": "totp.js",
+    "scripts": {},
+    "type": "module",
+    "author": "",
+    "license": "GPL-3.0-or-later",
+    "dependencies": {
+        "chalk": "^5.2.0"
+    }
+}

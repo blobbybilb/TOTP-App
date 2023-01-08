@@ -3,18 +3,12 @@
     export let token: TOTPAccount
     export let setTOTPDisplay: (token: TOTPAccount) => void
 
-    // export let setKey: Function
-
-    // function activate() {
-    //     setKey(token)
-    // }
+    function activate() {
+        setTOTPDisplay(token)
+    }
 </script>
 
-<!-- <main on:click={activate}>
-    <p>{token.name}</p>
-</main> -->
-
-<button>{token.name}</button>
+<button on:click={activate}>{token.name}</button>
 <br />
 
 <style>

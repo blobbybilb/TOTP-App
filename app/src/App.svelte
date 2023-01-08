@@ -18,7 +18,7 @@
 
 <main>
     <Titlebar {PIN} />
-    <Totpdisplay bind:setKey={setTOTPDisplay} />
+    <Totpdisplay bind:set={setTOTPDisplay} />
     <AccountsContainer {PIN} {setTOTPDisplay} />
 </main>
 

@@ -6,7 +6,6 @@
     import { keybind } from '../ui'
 
     import { DefaultSync } from '../sync'
-    import { refreshAccountsContainer } from '../stores'
 
     export let PIN: string
 
@@ -23,11 +22,6 @@
     function sync() {
         password = prompt('Enter your sync encryption password.', password ?? '')
         DefaultSync.syncData(PIN, localStorage.getItem('remoteToken'), password)
-        refresh()
-    }
-
-    function refresh() {
-        refreshAccountsContainer.update((n) => n + 1)
     }
 </script>
 

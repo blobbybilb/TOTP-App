@@ -3,16 +3,9 @@
     import Account from './Account.svelte'
     import { DefaultStorage } from '../../storage'
     import type { TOTPAccount } from '../../../../../core/types'
-    import { refreshAccountsContainer } from '../../stores'
 
     export let PIN: string
     export let setTOTPDisplay: (token: TOTPAccount) => void
-
-    let refresher: number
-
-    refreshAccountsContainer.subscribe((value) => {
-        refresher = value
-    })
 </script>
 
 <main>
