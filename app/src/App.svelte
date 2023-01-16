@@ -1,6 +1,6 @@
 <script lang="ts">
     import Titlebar from './lib/components/Titlebar.svelte'
-    import Totpdisplay from './lib/components/Totpdisplay.svelte' // FIXME
+    import Totpdisplay from './lib/components/Totpdisplay.svelte'
     import AccountsContainer from './lib/components/Accounts/AccountsContainer.svelte'
     import type { TOTPAccount } from '../../core/types'
 

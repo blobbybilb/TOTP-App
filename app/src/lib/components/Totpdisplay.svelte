@@ -24,7 +24,7 @@
     }
 
     function copy() {
-        navigator.clipboard.writeText(shownTOTP)
+        navigator.clipboard.writeText(shownTOTP.replace(' ', ''))
     }
 
     setInterval(updateDisplay, 1000)
@@ -46,7 +46,6 @@
         width: 100%;
         margin-top: calc(var(--spacing));
     }
-
     #account {
         font-size: 1.2em;
         margin: 0;
