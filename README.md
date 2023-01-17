@@ -1,4 +1,4 @@
-Note: progress will be slow for some time, as I'm busy with other stuff, and I don't need it right now. Also, I'd prefer to wait and see how common WebAuthn becomes before committing more time into this, just in case.
+#### Note: progress will be slow for some time, as I'm busy with other stuff, and I don't need it right now. Also, I'd prefer to wait and see how common WebAuthn becomes before committing more time into this, just in case.
 ---
 ### Open Source TOTP authenticator with E2EE self-hostable sync
 
