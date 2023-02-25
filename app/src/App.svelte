@@ -3,16 +3,15 @@
     import Totpdisplay from './lib/components/Totpdisplay.svelte'
     import AccountsContainer from './lib/components/Accounts/AccountsContainer.svelte'
     import type { TOTPAccount } from '../../core/types'
-
-    import { DefaultStorage } from './lib/storage'
+    import { storage } from './stores'
 
     let setTOTPDisplay: (token: TOTPAccount) => void // TODO replace this with a type
 
     const PIN: string = 'blob'
     // const PIN: string = prompt('Enter PIN')
 
-    if (!DefaultStorage.verifyLocalData()) {
-        DefaultStorage.initLocalData(PIN)
+    if (!$storage.verifyLocalData()) {
+        $storage.initLocalData(PIN)
     }
 </script>
 

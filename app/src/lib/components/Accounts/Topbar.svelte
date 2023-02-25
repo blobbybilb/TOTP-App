@@ -1,14 +1,15 @@
 <script lang="ts">
     import qrIcon from '../../../assets/qr-code-outline.svg'
     import plusIcon from '../../../assets/add-outline.svg'
-    import { DefaultStorage } from '../../storage'
+
+    import { storage } from '../../../stores'
 
     export let PIN: string
 
     function addAccount() {
         const name = prompt('Enter account name')
         const key = prompt('Enter account key')
-        DefaultStorage.addAccount(PIN, name, key)
+        $storage.addAccount(PIN, name!, key!)
     }
 </script>
 

@@ -1,18 +1,22 @@
 <script lang="ts">
     import Topbar from './Topbar.svelte'
     import Account from './Account.svelte'
-    import { DefaultStorage } from '../../storage'
     import type { TOTPAccount } from '../../../../../core/types'
+    import { storage } from '../../../stores'
 
     export let PIN: string
     export let setTOTPDisplay: (token: TOTPAccount) => void
+
+    async function getData() {
+        return (await $storage.getData(PIN))[1]!
+    }
 </script>
 
 <main>
     <Topbar {PIN} />
     <div id="container">
-        {#await DefaultStorage.getData(PIN) then tokens}
-            {#each tokens[1] as token}
+        {#await getData() then tokens}
+            {#each tokens as token}
                 <Account {token} {setTOTPDisplay} />
             {/each}
         {/await}

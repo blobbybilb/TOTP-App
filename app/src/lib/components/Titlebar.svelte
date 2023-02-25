@@ -1,15 +1,14 @@
 <script lang="ts">
     import { randomSecret } from '../../../../core/totp'
-    import { DefaultStorage } from '../storage'
     import syncIcon from '../../assets/sync-outline.svg'
     import settingsIcon from '../../assets/settings-outline.svg'
     import { keybind } from '../ui'
 
-    import { DefaultSync } from '../sync'
+    import { sync } from '../../stores'
 
     export let PIN: string
 
-    let password = null
+    let password: string | null = null
 
     function tokenPrompt() {
         const token = prompt(
@@ -19,15 +18,15 @@
         if (token) localStorage.setItem('remoteToken', token)
     }
 
-    function sync() {
+    function runSync() {
         password = prompt('Enter your sync encryption password.', password ?? '')
-        DefaultSync.syncData(PIN, localStorage.getItem('remoteToken'), password)
+        $sync.syncData(PIN, localStorage.getItem('remoteToken')!, password!)
     }
 </script>
 
 <main>
     <div id="grid">
-        <div on:click={sync} on:keypress={keybind}>
+        <div on:click={runSync} on:keypress={keybind}>
             <img src={syncIcon} alt="sync" />
         </div>
         <p>TOTP-App</p>
