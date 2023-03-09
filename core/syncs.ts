@@ -27,12 +27,15 @@ export class DefaultSync extends TemplateSync {
         token: string,
         password: string
     ): Promise<[SyncStatus, [RemoteStatus, StorageStatus]]> {
-        const [, remoteData] = await this.remote.getData(token, password)
+        let [, remoteData] = await this.remote.getData(token, password)
         const [, localData] = await this.storage.getData(PIN)
 
-        if (remoteData === null) await this.remote.setData(token, password, localData!) // TODO make this proper
+        if (remoteData === null) {
+            await this.remote.setData(token, password, localData!)
+            remoteData = localData
+        }
 
-        const merged = [...remoteData!, ...localData!] // FIXME errors if no remote data or error because remoteData is null
+        const merged = [...localData!, ...remoteData!] // order matters - local data overwrites if a local account has been edited
 
         const existingNames: string[] = []
         const deduplicated = merged.filter((value) => {
@@ -42,7 +45,7 @@ export class DefaultSync extends TemplateSync {
         })
 
         await this.storage.setData(PIN, deduplicated)
-        await this.remote.setData(token, password, deduplicated)
+        await this.remote.setData(token, password, deduplicated) // FIXME may cause timeout error, can be ignored though?
 
         return [SyncStatus.Success, [RemoteStatus.Success, StorageStatus.Success]]
     }

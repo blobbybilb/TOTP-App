@@ -4,6 +4,7 @@
     import type { TOTP } from '../../../../core/external/otpauth.esm'
     import copyIcon from '../../assets/copy-outline.svg'
     import { keybind } from '../ui'
+    import { currentName } from '../../stores'
 
     let shownTOTP = '123 123'
     let shownTimer = 0
@@ -21,6 +22,7 @@
         const current = totp.generate()
         shownTOTP = `${current.substring(0, 3)} ${current.substring(3, 6)}`
         shownTimer = getTimeUntilTOTPChange()
+        currentName.set(shownAccount)
     }
 
     function copy() {

@@ -26,12 +26,11 @@ export class DefaultStorage extends TemplateStorage {
     public async removeAccount(PIN: string, name: string): Promise<StorageStatus> {
         const [status, data] = await this.getData(PIN)
         if (!(status === StorageStatus.Success)) return status
-        const newData: Data = data!.filter((account) => account.name !== name) // TODO also check key
+        const newData: Data = data!.filter((account) => account.name !== name)
         return await this.setData(PIN, newData)
     }
 
     public verifyLocalData(): boolean {
-        // TODO verify local data
         return localStorage.getItem('data') !== null
     }
 
@@ -41,9 +40,7 @@ export class DefaultStorage extends TemplateStorage {
     }
 
     public initLocalData(PIN: string): StorageStatus {
-        this.setData(PIN, []) // TODO ask to add account
+        this.setData(PIN, [])
         return StorageStatus.Success
     }
 }
-
-// TODO data validation and proper functions

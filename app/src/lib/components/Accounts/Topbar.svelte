@@ -1,8 +1,10 @@
 <script lang="ts">
     import qrIcon from '../../../assets/qr-code-outline.svg'
     import plusIcon from '../../../assets/add-outline.svg'
+    import trashIcon from '../../../assets/trash-outline.svg'
+    import editIcon from '../../../assets/create-outline.svg'
 
-    import { storage } from '../../../stores'
+    import { currentName, storage } from '../../../stores'
 
     export let PIN: string
 
@@ -10,6 +12,23 @@
         const name = prompt('Enter account name')
         const key = prompt('Enter account key')
         $storage.addAccount(PIN, name!, key!)
+        window.location.reload()
+    }
+
+    async function removeAccount() {
+        if (confirm('Delete selected account?')) {
+            await $storage.removeAccount(PIN, $currentName)
+            window.location.reload()
+        }
+    }
+
+    async function editAccount() {
+        if (confirm('Edit selected account?')) {
+            const key = prompt('Enter new account key')
+            await $storage.removeAccount(PIN, $currentName)
+            await $storage.addAccount(PIN, $currentName, key!)
+            window.location.reload()
+        }
     }
 </script>
 
@@ -21,6 +40,14 @@
         <div on:click={addAccount} on:keypress>
             <img src={plusIcon} alt="add" />
         </div>
+        <div on:click={removeAccount} on:keypress>
+            <!-- FIXME this gets reset on sync -->
+            <img src={trashIcon} alt="delete" />
+        </div>
+        <div on:click={editAccount} on:keypress>
+            <img src={editIcon} alt="edit" />
+        </div>
+        <!-- TODO verify data is as expected when syncing after editing/deleting -->
     </div>
 </main>
 
