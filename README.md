@@ -16,6 +16,6 @@ Status: **Pre-alpha, not yet useable, in active development**
 - self-hosted remote (deno, koa): nearly functional
 
 - **GUI** (svelte SPA/PWA): close to functional
-- CLI (deno script): ~~not yet started~~ soon...
+- CLI (deno script): ~~not yet started~~ ~~soon...~~ maybe...
 - ~~no-JS GUI (non-E2EE, server side JS (could be self-hosted)): maybe~~
-- alexa skill: maybe
+- ~~alexa skill: maybe~~
