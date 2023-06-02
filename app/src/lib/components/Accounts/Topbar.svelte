@@ -16,8 +16,10 @@
     }
 
     async function removeAccount() {
+        // cannot simply remove account from storage because it gets added back on sync
         if (confirm('Delete selected account?')) {
             await $storage.removeAccount(PIN, $currentName)
+            await $storage.addAccount(PIN, $currentName, 'deleteddeleteddeleted')
             window.location.reload()
         }
     }
@@ -34,14 +36,13 @@
 
 <main>
     <div id="grid">
-        <div>
+        <div on:click={() => alert('QR code scanning is coming soon-ish')} on:keypress>
             <img src={qrIcon} alt="scan" />
         </div>
         <div on:click={addAccount} on:keypress>
             <img src={plusIcon} alt="add" />
         </div>
         <div on:click={removeAccount} on:keypress>
-            <!-- FIXME this gets reset on sync -->
             <img src={trashIcon} alt="delete" />
         </div>
         <div on:click={editAccount} on:keypress>

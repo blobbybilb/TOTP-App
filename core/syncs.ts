@@ -36,7 +36,7 @@ export class DefaultSync extends TemplateSync {
         }
 
         const merged = [...localData!, ...remoteData!] // order matters - local data overwrites if a local account has been edited
-
+            .filter((el) => el.key !== 'deleteddeleteddeleted')
         const existingNames: string[] = []
         const deduplicated = merged.filter((value) => {
             if (existingNames.includes(value.name)) return false
@@ -45,7 +45,7 @@ export class DefaultSync extends TemplateSync {
         })
 
         await this.storage.setData(PIN, deduplicated)
-        await this.remote.setData(token, password, deduplicated) // FIXME may cause timeout error, can be ignored though?
+        await this.remote.setData(token, password, deduplicated) // FIXME may cause timeout error, can be ignored though? -- FIXME also for remote, not causing timeout error?
 
         return [SyncStatus.Success, [RemoteStatus.Success, StorageStatus.Success]]
     }

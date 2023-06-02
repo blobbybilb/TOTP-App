@@ -5,7 +5,7 @@
     import type { TOTPAccount } from '../../core/types'
     import { storage } from './stores'
 
-    let setTOTPDisplay: (token: TOTPAccount) => void // TODO replace this with a type
+    let setTOTPDisplay: (token: TOTPAccount) => void
 
     const PIN: string = 'blob'
     // const PIN: string = prompt('Enter PIN')

@@ -17,7 +17,9 @@
     <div id="container">
         {#await getData() then tokens}
             {#each tokens as token}
-                <Account {token} {setTOTPDisplay} />
+                {#if token.key !== 'deleteddeleteddeleted'}
+                    <Account {token} {setTOTPDisplay} />
+                {/if}
             {/each}
         {/await}
         <div id="bottom-padding" />
