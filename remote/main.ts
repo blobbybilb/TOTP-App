@@ -1,6 +1,5 @@
-import { RemoteStatus } from '../../core/types'
+import { RemoteStatus } from '../core/types'
 
-//#region
 export interface Env {
     kv: KVNamespace
 }
@@ -53,7 +52,6 @@ async function timeoutCheck(ip: string, write: boolean): Promise<boolean> {
     recentIPs.add(ip)
     return false
 }
-//#endregion
 
 async function getData(token: string, env: Env): Promise<Response> {
     const data = await env.kv.get(token)
@@ -66,6 +64,7 @@ async function setData(token: string, env: Env, data: string): Promise<Response>
     await env.kv.put(token, data)
     return createResponse(RemoteStatus.Success)
 }
+
 
 export default {
     async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {

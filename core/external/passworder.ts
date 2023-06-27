@@ -1,4 +1,6 @@
-/* Passworder from https://github.com/MetaMask/browser-passworder 
+// @ts-nocheck
+
+/* Passworder from https://github.com/MetaMask/browser-passworder
 
 ISC License
 

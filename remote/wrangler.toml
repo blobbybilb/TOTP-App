@@ -1,5 +1,5 @@
 name = "totp"
-main = "src/index.ts"
+main = "main.ts"
 compatibility_date = "2022-10-22"
 
 kv_namespaces = [
