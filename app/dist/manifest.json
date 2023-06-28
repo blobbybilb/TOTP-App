@@ -1,0 +1,17 @@
+{
+    "name": "TOTP App",
+    "short_name": "TOTP App",
+    "start_url": "/",
+    "display": "fullscreen",
+    "background_color": "#ffffff",
+    "theme_color": "#ffffff",
+    "description": "totp",
+    "icons": [
+        {
+            "src": "/lock.svg",
+            "sizes": "48x48 72x72 96x96 128x128 256x256 512x512",
+            "type": "image/svg+xml",
+            "purpose": "maskable any"
+        }
+    ]
+}
