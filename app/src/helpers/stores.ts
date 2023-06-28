@@ -9,3 +9,10 @@ export const storage = readable(new DefaultStorage())
 export const sync = readable(new DefaultSync(new DefaultRemote(), new DefaultStorage()))
 
 export const currentName = writable('')
+
+export enum ModalShown {
+    None,
+    QRScan,
+}
+
+export const modalShown = writable(ModalShown.None)

@@ -3,26 +3,25 @@
     import syncIcon from '../assets/sync-outline.svg'
     import settingsIcon from '../assets/settings-outline.svg'
     import {sync} from '../helpers/stores'
-    import IconButton from "../lib/components/IconButton.svelte";
-    import {DefaultSync} from "../../../core/syncs";
-    import {DefaultStorage} from "../helpers/storage";
-    import {DefaultRemote} from "../../../core/remotes";
+    import IconButton from "../components/IconButton.svelte";
 
     export let PIN: string
 
-    let password: string | null = null
+    // let password: string | null = null
 
     function tokenPrompt() {
         const token = prompt(
             'Enter an existing sync token or use the randomly generated one.',
-            localStorage.getItem('remoteToken') ?? randomSecret()
+            localStorage.getItem('remoteToken') ?? randomSecret() // TODO encrypt
         )
         if (token) localStorage.setItem('remoteToken', token)
     }
 
     function runSync() {
-        password = prompt('Enter your sync encryption password.', password ?? '')
-        $sync.syncData(PIN, localStorage.getItem('remoteToken')!, password!)
+        let password = prompt('Enter your sync encryption password.', localStorage.getItem('remotePassword') ?? '')
+        if (password === null) return
+        localStorage.setItem('remotePassword', password) // TODO encrypt
+        $sync.syncData(PIN, localStorage.getItem('remoteToken')!, password!).then(window.location.reload.bind(window.location))
     }
 </script>
 

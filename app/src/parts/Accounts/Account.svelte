@@ -25,7 +25,7 @@
 <style>
     button {
         height: 40px;
-        max-width: 300px;
+        max-width: 500px;
         width: 70%;
         border-radius: 10px;
         box-shadow: 0 0 0 2px var(--main-background-color), 0 0 0 5px var(--accent-background-color);

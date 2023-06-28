@@ -4,8 +4,8 @@
     import trashIcon from '../../assets/trash-outline.svg'
     import editIcon from '../../assets/create-outline.svg'
 
-    import {currentName, storage} from '../../helpers/stores'
-    import IconButton from "../../lib/components/IconButton.svelte";
+    import {currentName, ModalShown, modalShown, storage} from '../../helpers/stores'
+    import IconButton from "../../components/IconButton.svelte";
 
     export let PIN: string
 
@@ -39,7 +39,7 @@
 </script>
 
 <div>
-    <IconButton action={() => alert('QR code scanning is coming soon-ish')} src={qrIcon} alt="scan"/>
+    <IconButton action={() => $modalShown = ModalShown.QRScan} src={qrIcon} alt="scan"/>
     <IconButton action={addAccount} src={plusIcon} alt="add"/>
     <IconButton action={removeAccount} src={trashIcon} alt="delete"/>
     <IconButton action={editAccount} src={editIcon} alt="edit"/>

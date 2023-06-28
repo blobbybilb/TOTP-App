@@ -1,7 +1,7 @@
-import type { Data } from '../../../core/types'
-import { encryptData, decryptData } from '../../../core/encryption'
-import { TemplateStorage } from '../../../core/storages'
-import { StorageStatus } from '../../../core/types'
+import type {Data} from '../../../core/types'
+import {encryptData, decryptData} from '../../../core/encryption'
+import {TemplateStorage} from '../../../core/storages'
+import {StorageStatus} from '../../../core/types'
 
 export class DefaultStorage extends TemplateStorage {
     public async getData(PIN: string): Promise<[StorageStatus, Data | null]> {
@@ -19,7 +19,7 @@ export class DefaultStorage extends TemplateStorage {
     public async addAccount(PIN: string, name: string, secret: string): Promise<StorageStatus> {
         const [status, data] = await this.getData(PIN)
         if (!(status === StorageStatus.Success)) return status
-        data!.push({ name: name, key: secret })
+        data!.push({name: name, key: secret})
         return await this.setData(PIN, data!)
     }
 
@@ -40,7 +40,7 @@ export class DefaultStorage extends TemplateStorage {
     }
 
     public initLocalData(PIN: string): StorageStatus {
-        this.setData(PIN, [])
+        let _ = this.setData(PIN, []);
         return StorageStatus.Success
     }
 }

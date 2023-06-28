@@ -3,7 +3,9 @@
     import Totpdisplay from './parts/Totpdisplay.svelte'
     import Accounts from './parts/Accounts/Container.svelte'
     import type {TOTPAccount} from '../../core/types'
-    import {storage} from './helpers/stores'
+    import {ModalShown, modalShown, storage} from './helpers/stores'
+    import QRScanModal from "./parts/QRScanModal.svelte";
+
 
     let setTOTPDisplay: (token: TOTPAccount) => void
 
@@ -19,6 +21,9 @@
     <Titlebar {PIN}/>
     <Totpdisplay bind:set={setTOTPDisplay}/>
     <Accounts {PIN} {setTOTPDisplay}/>
+    {#if $modalShown === ModalShown.QRScan}
+        <QRScanModal {PIN}/>
+    {/if}
 </main>
 
 <style>

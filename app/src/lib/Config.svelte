@@ -1,7 +1,9 @@
 <script lang="ts">
     let token = localStorage.getItem('remoteToken')
     let password: string
-    function save() {}
+
+    function save() {
+    }
 </script>
 
 <main>
@@ -9,10 +11,10 @@
         <h2>Remote Sync</h2>
         <div class="token">
             <label for="token">Token</label>
-            <input type="text" id="token" bind:value={token} />
+            <input type="text" id="token" bind:value={token}/>
 
             <label for="password">Password</label>
-            <input type="password" id="password" bind:value={password} />
+            <input type="password" id="password" bind:value={password}/>
 
             <button on:click={save}>Save</button>
         </div>
@@ -29,7 +31,9 @@
         width: 300px;
         z-index: 2;
     }
+
     * {
         display: block;
     }
+
 </style>

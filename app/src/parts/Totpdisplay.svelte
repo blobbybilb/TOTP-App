@@ -5,7 +5,7 @@
     import copyIcon from '../assets/copy-outline.svg'
     import {keybind} from '../helpers/ui'
     import {currentName} from '../helpers/stores'
-    import IconButton from "../lib/components/IconButton.svelte";
+    import IconButton from "../components/IconButton.svelte";
 
     let shownTOTP = '123 123'
     let shownTimer = 0
