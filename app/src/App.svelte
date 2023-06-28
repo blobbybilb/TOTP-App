@@ -1,9 +1,9 @@
 <script lang="ts">
-    import Titlebar from './lib/components/Titlebar.svelte'
-    import Totpdisplay from './lib/components/Totpdisplay.svelte'
-    import AccountsContainer from './lib/components/Accounts/AccountsContainer.svelte'
-    import type { TOTPAccount } from '../../core/types'
-    import { storage } from './stores'
+    import Titlebar from './parts/Titlebar.svelte'
+    import Totpdisplay from './parts/Totpdisplay.svelte'
+    import Accounts from './parts/Accounts/Container.svelte'
+    import type {TOTPAccount} from '../../core/types'
+    import {storage} from './helpers/stores'
 
     let setTOTPDisplay: (token: TOTPAccount) => void
 
@@ -16,9 +16,9 @@
 </script>
 
 <main>
-    <Titlebar {PIN} />
-    <Totpdisplay bind:set={setTOTPDisplay} />
-    <AccountsContainer {PIN} {setTOTPDisplay} />
+    <Titlebar {PIN}/>
+    <Totpdisplay bind:set={setTOTPDisplay}/>
+    <Accounts {PIN} {setTOTPDisplay}/>
 </main>
 
 <style>

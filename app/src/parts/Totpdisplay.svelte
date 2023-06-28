@@ -1,10 +1,11 @@
 <script lang="ts">
-    import type { TOTPAccount } from '../../../../core/types'
-    import { getTimeUntilTOTPChange, newTOTP } from '../../../../core/totp'
-    import type { TOTP } from '../../../../core/external/otpauth.esm'
-    import copyIcon from '../../assets/copy-outline.svg'
-    import { keybind } from '../ui'
-    import { currentName } from '../../stores'
+    import type {TOTPAccount} from '../../../core/types'
+    import {getTimeUntilTOTPChange, newTOTP} from '../../../core/totp'
+    import type {TOTP} from '../../../core/external/otpauth.esm'
+    import copyIcon from '../assets/copy-outline.svg'
+    import {keybind} from '../helpers/ui'
+    import {currentName} from '../helpers/stores'
+    import IconButton from "../lib/components/IconButton.svelte";
 
     let shownTOTP = '123 123'
     let shownTimer = 0
@@ -32,40 +33,35 @@
     setInterval(updateDisplay, 1000)
 </script>
 
-<main>
+<div>
     <p id="account">{shownAccount}</p>
     <p id="otp">{shownTOTP}</p>
-    <div on:click={copy} on:keypress={keybind}>
-        <img src={copyIcon} alt="copy" />
-    </div>
+    <IconButton action={copy} src={copyIcon} alt="copy" size={25}/>
     <p id="timer">{shownTimer}</p>
-</main>
+</div>
 
 <style>
-    main {
+    div {
         --spacing: 15px;
         text-align: center;
         width: 100%;
         margin-top: calc(var(--spacing));
     }
+
     #account {
         font-size: 1.2em;
         margin: 0;
     }
+
     #otp {
         font-weight: 300;
         font-size: 3em;
-        margin: 0;
-        margin-top: var(--spacing);
+        margin: var(--spacing) 0 0;
+        margin-bottom: 10px;
     }
+
     #timer {
         text-align: center;
-        margin: 0;
-        margin-top: var(--spacing);
-    }
-    img {
-        height: 25px;
-        filter: var(--img-filter);
-        margin-top: 10px;
+        margin: var(--spacing) 0 0;
     }
 </style>

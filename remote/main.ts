@@ -1,4 +1,4 @@
-import { RemoteStatus } from '../core/types'
+import {RemoteStatus} from '../core/types'
 
 export interface Env {
     kv: KVNamespace
@@ -11,7 +11,7 @@ async function createHeaders(): Promise<Headers> {
 }
 
 async function createResponse(data: string): Promise<Response> {
-    return new Response(data, { headers: await createHeaders() })
+    return new Response(data, {headers: await createHeaders()})
 }
 
 async function invalidRoute(): Promise<Response> {
@@ -34,11 +34,11 @@ let readReset = getSeconds()
 let writeReset = getSeconds()
 
 async function updateTimeout() {
-    if (getSeconds() - readReset >= 5) {
+    if (getSeconds() - readReset >= 1) { // 5
         readReset = getSeconds()
         recentIPsRead.clear()
     }
-    if (getSeconds() - writeReset >= 30) {
+    if (getSeconds() - writeReset >= 10) { // 30
         writeReset = getSeconds()
         recentIPsWrite.clear()
     }
@@ -46,8 +46,6 @@ async function updateTimeout() {
 
 async function timeoutCheck(ip: string, write: boolean): Promise<boolean> {
     const recentIPs = write ? recentIPsWrite : recentIPsRead
-    console.log(recentIPsRead)
-    console.log(recentIPsWrite)
     if (recentIPs.has(ip)) return true
     recentIPs.add(ip)
     return false
@@ -68,8 +66,11 @@ async function setData(token: string, env: Env, data: string): Promise<Response>
 
 export default {
     async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
-        const [action, token] = request.url.replace('https://totp.blobbybilb.workers.dev/', '').split('/')
+        const [action, token] =
+            new URL(request.url).pathname.split('/').filter(x => x !== '')
+
         const ip = request.headers.get('CF-Connecting-IP')!
+
         updateTimeout()
         switch (action) {
             case 'get':

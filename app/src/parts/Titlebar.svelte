@@ -1,10 +1,12 @@
 <script lang="ts">
-    import { randomSecret } from '../../../../core/totp'
-    import syncIcon from '../../assets/sync-outline.svg'
-    import settingsIcon from '../../assets/settings-outline.svg'
-    import { keybind } from '../ui'
-
-    import { sync } from '../../stores'
+    import {randomSecret} from '../../../core/totp'
+    import syncIcon from '../assets/sync-outline.svg'
+    import settingsIcon from '../assets/settings-outline.svg'
+    import {sync} from '../helpers/stores'
+    import IconButton from "../lib/components/IconButton.svelte";
+    import {DefaultSync} from "../../../core/syncs";
+    import {DefaultStorage} from "../helpers/storage";
+    import {DefaultRemote} from "../../../core/remotes";
 
     export let PIN: string
 
@@ -26,13 +28,9 @@
 
 <main>
     <div id="grid">
-        <div on:click={runSync} on:keypress={keybind}>
-            <img src={syncIcon} alt="sync" />
-        </div>
-        <p>TOTP-App</p>
-        <div on:click={tokenPrompt} on:keypress={keybind}>
-            <img src={settingsIcon} alt="settings" />
-        </div>
+        <IconButton action={runSync} src={syncIcon} alt="sync"/>
+        <p>TOTP[App]</p>
+        <IconButton action={tokenPrompt} src={settingsIcon} alt="settings"/>
     </div>
 </main>
 
@@ -47,12 +45,14 @@
         height: var(--titlebar-height);
         box-shadow: 0 0 0 3px var(--main-background-color), 0 0 0 6px var(--accent-background-color);
     }
+
     div#grid {
         display: grid;
         margin-left: 10px;
         margin-right: 10px;
-        grid-template: 100% / 25px auto 25px;
+        grid-template: 100% / min-content auto min-content;
     }
+
     p {
         margin: 0;
         font-size: 1.4em;
