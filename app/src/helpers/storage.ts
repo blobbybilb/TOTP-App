@@ -2,6 +2,7 @@ import type {Data} from '../../../core/types'
 import {encryptData, decryptData} from '../../../core/encryption'
 import {TemplateStorage} from '../../../core/storages'
 import {StorageStatus} from '../../../core/types'
+import {deletedAccountString} from "../../../core/constants";
 
 export class DefaultStorage extends TemplateStorage {
     public async getData(PIN: string): Promise<[StorageStatus, Data | null]> {
@@ -17,9 +18,17 @@ export class DefaultStorage extends TemplateStorage {
     }
 
     public async addAccount(PIN: string, name: string, secret: string): Promise<StorageStatus> {
-        const [status, data] = await this.getData(PIN)
+        let [status, data] = await this.getData(PIN)
         if (!(status === StorageStatus.Success)) return status
+
+        if (data!.some((account) => (account.key !== deletedAccountString) && (account.name === name))) {
+            return StorageStatus.Duplicate
+        }
+
+        data = data!
+            .filter((account) => !((account.key === deletedAccountString) && (account.name === name)))
         data!.push({name: name, key: secret})
+
         return await this.setData(PIN, data!)
     }
 

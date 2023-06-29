@@ -60,12 +60,21 @@
             lastStatusUpdate = Date.now()
             return
         }
+        qrScanner.stop();
+
+        let name = `${issuer}: ${user}`
+        name = prompt("Enter a name for this account", name)
+
+        if (name === null) {
+            $modalShown = ModalShown.None
+            return
+        }
 
         $storage.addAccount(PIN, `${issuer}: ${user}`, secret).then((s) => {
-            if (s !== StorageStatus.Success) alert("Failed to add account from QR code")
+            if (s === StorageStatus.Duplicate) alert("Account already exists")
+            else if (s !== StorageStatus.Success) alert("Failed to add account from QR code")
             window.location.reload()
         })
-        qrScanner.stop();
         $modalShown = ModalShown.None
     }
 
@@ -78,7 +87,6 @@
             {
                 returnDetailedScanResult: true,
                 overlay: true,
-                // onDecodeError: error => console.error(error),
             },
         )
         qrScanner.start();
@@ -86,14 +94,18 @@
 </script>
 
 <section>
-    <div>
+    <div class="placeholder"></div>
+
+    <div class="video-container">
         <figure>
             <video id="qr-scan-el"></video>
         </figure>
     </div>
+
     <p>{status}</p>
     <button on:click={() => $modalShown = ModalShown.None}>Cancel</button>
 </section>
+<div class="overlay"></div>
 
 <style>
     section {
@@ -107,21 +119,28 @@
         box-shadow: 0 0 0 5px var(--main-background-color), 0 0 0 8px var(--accent-color);
         border-radius: 10px;
         display: grid;
-
     }
 
-    div {
-        width: fit-content;
-        height: fit-content;
+    div.video-container {
+        width: min-content;
+        height: min-content;
         margin: auto;
+        position: absolute;
+        top: 0;
+        left: 45vw;
+        transform: translateX(-50%);
+    }
+
+    div.placeholder {
+        height: 60vh;
     }
 
     video {
-        width: auto;
-        height: 50vh;
+        width: min-content;
         margin-left: auto;
         border-radius: 10px;
-        max-width: 80vw;
+        max-height: 50vh;
+        /*max-width: 90vw;*/
     }
 
     button {
@@ -141,5 +160,18 @@
     p {
         margin: 0 auto;
         color: var(--main-color);
+    }
+
+    div.overlay {
+        width: 90vw;
+        height: 90vh;
+        z-index: 2;
+        position: absolute;
+        top: 5vh;
+        left: 5vw;
+        box-shadow: 0 0 0 5px var(--main-background-color), 0 0 0 8px var(--accent-color), 0 0 10vmax 10vmax var(--main-background-color);
+        border-radius: 10px;
+        display: grid;
+        pointer-events: none
     }
 </style>
