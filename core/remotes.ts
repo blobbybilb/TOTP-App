@@ -1,11 +1,12 @@
-import { encryptData, decryptData } from './encryption'
-import type { Data } from './types'
-import { RemoteStatus } from './types'
+import {encryptData, decryptData} from './encryption'
+import type {Data} from './types'
+import {RemoteStatus} from './types'
 
 export abstract class TemplateRemote {
     public abstract readonly remoteURLs: { get: string; set: string; exists: string }
 
     public abstract getData(token: string, password: string): Promise<[RemoteStatus, Data | null]>
+
     public abstract setData(token: string, password: string, data: Data): Promise<RemoteStatus>
 }
 
@@ -36,7 +37,6 @@ export class DefaultRemote extends TemplateRemote {
             password,
             recievedData.substring(RemoteStatus.Success.length, recievedData.length)
         )
-        // TODO validate data here?
         return [RemoteStatus.Success, data]
     }
 
