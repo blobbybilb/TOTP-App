@@ -91,6 +91,13 @@
         )
         qrScanner.start();
     })
+
+    modalShown.subscribe((value) => {
+        if (value !== ModalShown.QRScan) {
+            qrScanner.stop();
+        }
+    })
+
 </script>
 
 <section>

@@ -7,7 +7,7 @@
     import {currentName} from '../helpers/stores'
     import IconButton from "../components/IconButton.svelte";
 
-    let shownTOTP = '123 123'
+    let shownTOTP = '--- ---'
     let shownTimer = 0
     let shownAccount = '-'
     let totp: TOTP

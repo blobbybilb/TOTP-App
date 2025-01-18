@@ -5,7 +5,7 @@
     import {sync} from '../helpers/stores'
     import IconButton from "../components/IconButton.svelte";
 
-    export let PIN: string
+    let { PIN }: { PIN: string }= $props();
 
     // let password: string | null = null
 

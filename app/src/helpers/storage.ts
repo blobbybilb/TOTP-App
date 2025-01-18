@@ -18,7 +18,7 @@ export class DefaultStorage extends TemplateStorage {
     }
 
     public async addAccount(PIN: string, name: string, secret: string): Promise<StorageStatus> {
-        let [status, data] = await this.getData(PIN)
+    let [status, data] = await this.getData(PIN)
         if (!(status === StorageStatus.Success)) return status
 
         if (data!.some((account) => (account.key !== deletedAccountString) && (account.name === name))) {

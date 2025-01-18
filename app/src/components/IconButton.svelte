@@ -25,4 +25,20 @@
         min-height: 0;
         min-width: 0;
     }
+
+    button:active img {
+        animation: fade 0.5s;
+    }
+
+    @keyframes fade {
+        0% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0.5;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
 </style>

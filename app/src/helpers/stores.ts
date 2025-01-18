@@ -13,6 +13,7 @@ export const currentName = writable('')
 export enum ModalShown {
     None,
     QRScan,
+    Help
 }
 
 export const modalShown = writable(ModalShown.None)
