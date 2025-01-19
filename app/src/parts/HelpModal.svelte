@@ -45,7 +45,7 @@
     </div>
     <div>
         <IconButton src={settingsIcon} alt="settings" action={() => {}} />
-        <span>Change or set your sync account token</span>
+        <span>Change or set your sync account token (this should be the same across all your devices)</span>
     </div>
     <button on:click={onDone}>Done</button>
 </section>
