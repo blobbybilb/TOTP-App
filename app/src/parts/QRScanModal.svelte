@@ -61,7 +61,7 @@
         if (url.searchParams.has("issuer")) {
             issuer = url.searchParams.get("issuer")!
         }
-        if (url.searchParams.has("user")) {
+        if (label !== "") {
             user = url.searchParams.get("user")!
         }
 
