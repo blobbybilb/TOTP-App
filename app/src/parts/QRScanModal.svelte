@@ -33,44 +33,75 @@
             return
         }
         // otpauth://totp/Example:alice@google.com?secret=JBSWY3DPEHPK3PXP
-        let part1, part2
-        try {
-            [part1, part2] = url.pathname.split("/").filter(x => x !== "")
-        } catch (_) {
-            status = "Invalid QR code (not a valid URL)"
-            lastStatusUpdate = Date.now()
-            return
-        }
-        if (part1 !== "totp") {
+        // let part1, part2
+        // try {
+        //     [part1, part2] = url.pathname.split("/").filter(x => x !== "")
+        // } catch (_) {
+        //     status = "Invalid QR code (not a valid URL)"
+        //     lastStatusUpdate = Date.now()
+        //     return
+        // }
+        // if (part1 !== "totp") {
+        //     status = "Invalid QR code (not a TOTP URL)"
+        //     lastStatusUpdate = Date.now()
+        //     return
+        // }
+
+
+        // otpauth://totp/somelabel?secret=somesecret&issuer=someissuer
+        if (url.hostname !== "totp") {
             status = "Invalid QR code (not a TOTP URL)"
             lastStatusUpdate = Date.now()
             return
         }
-        let issuer, user
-        try {
-            [issuer, user] = part2.split(":")
-        } catch (_) {
-            status = "Invalid QR code (not a valid URL)"
-            lastStatusUpdate = Date.now()
-            return
+
+        const label = url.pathname.split("/").filter(x => x !== "")[0]
+
+        let [issuer, user] = ["", ""]
+        if (url.searchParams.has("issuer")) {
+            issuer = url.searchParams.get("issuer")!
         }
+        if (url.searchParams.has("user")) {
+            user = url.searchParams.get("user")!
+        }
+
         const secret = url.searchParams.get("secret")
         if (secret === null) {
             status = "Invalid QR code (no secret found)"
             lastStatusUpdate = Date.now()
             return
         }
+
         qrScanner.stop();
 
-        let name = `${issuer}: ${user}`
+        let name = `${issuer}${issuer !== "" ? ": " : ""}${user}`
         name = prompt("Enter a name for this account", name)
+
+        // let issuer, user
+        // try {
+        //     [issuer, user] = part2.split(":")
+        // } catch (_) {
+        //     status = "Invalid QR code (not a valid URL)"
+        //     lastStatusUpdate = Date.now()
+        //     return
+        // }
+        // const secret = url.searchParams.get("secret")
+        // if (secret === null) {
+        //     status = "Invalid QR code (no secret found)"
+        //     lastStatusUpdate = Date.now()
+        //     return
+        // }
+        // qrScanner.stop();
+
+        // let name = `${issuer}: ${user}`
+        // name = prompt("Enter a name for this account", name)
 
         if (name === null) {
             $modalShown = ModalShown.None
             return
         }
 
-        $storage.addAccount(PIN, `${issuer}: ${user}`, secret).then((s) => {
+        $storage.addAccount(PIN, name, secret).then((s) => {
             if (s === StorageStatus.Duplicate) alert("Account already exists")
             else if (s !== StorageStatus.Success) alert("Failed to add account from QR code")
             window.location.reload()
