@@ -62,7 +62,7 @@
             issuer = url.searchParams.get("issuer")!
         }
         if (label !== "") {
-            user = url.searchParams.get("user")!
+            user = label
         }
 
         const secret = url.searchParams.get("secret")
