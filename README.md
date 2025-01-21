@@ -29,6 +29,8 @@ You can also self-host the `app/dist` directory, which contains the same site de
 
 By default, it uses Cloudflare Workers to sync data across devices.
 
+**Disclaimer:** I'm not responsible or liable for any data loss, security issues, etc. that arise from your use of this app. Use at your own risk, especially while this is in beta. I've tried not to leave major security vulnerabilities but obviously can't guarantee that.
+
 ## Self-hosted sync
 *Not yet supported in the GUI App, coming soon.*
 The `remote` directory contains an npm project for a cloudflare worker. To run it locally you can run `npm i` and `npm run start` in the `remote` directory. (This uses `miniflare` and `workersd`).

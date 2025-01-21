@@ -2,8 +2,11 @@
     import type {TOTPAccount} from '../../../../core/types'
     import {currentName} from "../../helpers/stores";
 
-    export let token: TOTPAccount
-    export let setTOTPDisplay: (token: TOTPAccount) => void
+    // export let token: TOTPAccount
+    // export let setTOTPDisplay: (token: TOTPAccount) => void
+
+    let { token, setTOTPDisplay }: { token: TOTPAccount, setTOTPDisplay: (token: TOTPAccount) => void } = $props()
+
     // const id = `${Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)}`
     const id = `${token.name}`
 
@@ -19,7 +22,7 @@
     }
 </script>
 
-<button on:click={activate} {id} class={$currentName === token.name ? "selected" : ""}>{token.name}</button>
+<button onclick={activate} {id} class={$currentName === token.name ? "selected" : ""}>{token.name}</button>
 <br/>
 
 <style>

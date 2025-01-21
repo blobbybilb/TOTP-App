@@ -5,8 +5,9 @@
     import {currentName, storage} from '../../helpers/stores'
     import {deletedAccountString} from "../../../../core/constants";
 
-    export let PIN: string
-    export let setTOTPDisplay: (token: TOTPAccount) => void
+    // export let PIN: string
+    // export let setTOTPDisplay: (token: TOTPAccount) => void
+    let { PIN, setTOTPDisplay }: { PIN: string, setTOTPDisplay: (token: TOTPAccount) => void } = $props()
 
     async function getData() {
         console.log('DATA', (await $storage.getData(PIN))[1]!)

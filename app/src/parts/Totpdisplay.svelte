@@ -7,10 +7,10 @@
     import {currentName} from '../helpers/stores'
     import IconButton from "../components/IconButton.svelte";
 
-    let shownTOTP = '--- ---'
-    let shownTimer = 0
-    let shownAccount = '-'
-    let totp: TOTP
+    let shownTOTP = $state('--- ---')
+    let shownTimer = $state(0)
+    let shownAccount = $state('-')
+    let totp: TOTP | null = $state(null)
 
     export function set(token: TOTPAccount): void {
         totp = newTOTP(token.key)

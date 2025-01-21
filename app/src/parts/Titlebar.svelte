@@ -5,23 +5,33 @@
     import {sync} from '../helpers/stores'
     import IconButton from "../components/IconButton.svelte";
 
-    let { PIN }: { PIN: string }= $props();
+    let { PIN }: { PIN: string } = $props();
 
     // let password: string | null = null
 
     function tokenPrompt() {
         const token = prompt(
-            'Enter an existing sync token or use the randomly generated one.',
+            'Enter an existing sync token or use the randomly generated one. This should be the same across all your devices, and make sure to save it somewhere safe.',
             localStorage.getItem('remoteToken') ?? randomSecret() // TODO encrypt
         )
         if (token) localStorage.setItem('remoteToken', token)
     }
 
-    function runSync() {
-        let password = prompt('Enter your sync encryption password.', localStorage.getItem('remotePassword') ?? '')
+    async function runSync() {
+        let password = prompt('Enter your sync encryption password. If this is the first time you are syncing, enter a new password (and keep it somewhere safe).', localStorage.getItem('remotePassword') ?? '')
         if (password === null) return
         localStorage.setItem('remotePassword', password) // TODO encrypt
-        $sync.syncData(PIN, localStorage.getItem('remoteToken')!, password!).then(window.location.reload.bind(window.location))
+        try {
+            await $sync.syncData(PIN, localStorage.getItem('remoteToken')!, password!)
+            window.location.reload()
+        } catch (error) {
+            if (error instanceof Error && error.message === "Incorrect password") {
+                alert("Incorrect password. Please try again.")
+                localStorage.removeItem('remotePassword')
+            } else {
+                throw error
+            }
+        }
     }
 </script>
 

@@ -4,12 +4,13 @@
     import {ModalShown, storage, modalShown} from "../helpers/stores";
     import {StorageStatus} from "../../../core/types";
 
-    export let PIN: string
+    // export let PIN: string
+    let { PIN }: { PIN: string } = $props()
 
     let qrScanner: QrScanner
 
-    let lastStatusUpdate = Date.now()
-    let status = "Scanning..."
+    let lastStatusUpdate = $state(Date.now())
+    let status = $state("Scanning...")
 
     setInterval(() => {
         if (Date.now() - lastStatusUpdate > 2000) {
