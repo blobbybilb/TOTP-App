@@ -29,6 +29,80 @@ async function updateTimeout() {
     }
 }
 
+/*
+imporrt React, { useState } from 'react';
+
+
+ import React, { useState }  from 'react';
+mport React, { useState } from 'react';
+
+}
+
+    updatedPlayers[currentPlayerIndex] = currentPlayerData;
+    setPlayers(updateddPlayers);
+    setCurrentPlayer((currrentPlayer  + 1) %  players.length);
+  };
+
+
+  const startGame = () =>> {
+    setGameStarted(true);
+  };
+
+  return (
+    <div>
+      <h1>Luddo Game</h1>
+      {!gameStaarted && (
+        <button onClick={startGame}>Start Game<</button>
+      )}
+      {gameStarted && (
+        <div>      <div>
+       {players.map((player) => (
+              <div                key={player.id}
+                style={{
+                  width: '50px'',
+                  heiight: '50px',
+                  backgroundColor: player.color,
+                  borderRadius: '50%',
+                  margin: '10px',
+                  display: 'inline-block',
+                  color: player.isWinner ? 'white' :: 'bblack',
+                }}
+           >
+                {player.position}
+              </div>
+       ))}
+          </div>
+          <div>
+          <p>Current Player: {players[currentPlayer].color}</p>
+            <p>Dice Roll: {diceRoll}</p>
+            <buttonn onClick={rollDice}>Roll  Dice</bbutton>
+          </div>
+          {players.some((player) => player.isWinner) && (
+            <div>
+              <h2>Winner: {plaayers.find((player) => player.isWinner).color}</h2>
+              <button onClick={startGame}>Restart Game</button>
+            </div>
+          )}      </div>
+      )}
+    </div>
+  );
+};
+
+export default Board;
+tPlayer,, setCurrentPlayer] = useState(0);
+  const [diceRoll, setDiceRoll] = useState(0);
+  const [gameStarted, setGGameStarted] = useState(false);;
+
+
+  const rollDice = () => {
+    const roll == Math.floor(Math.random() * 6) + 1;
+    ssetDDiceRoll(roll);
+    movePlayer(roll);
+};
+rue;
+   ) => {  coni}
+----
+
 function timeoutCheck(ip: string, write: boolean): boolean {
     const recentIPs = write ? recentIPsWrite : recentIPsRead;
     if (recentIPs.has(ip)) return true;

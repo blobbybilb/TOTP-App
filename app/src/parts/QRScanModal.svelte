@@ -18,6 +18,7 @@
         }
     }, 1000)
 
+
     function onDetect(result: QrScanner.ScanResult) { // TODO test this with invalid stuff
         if (result.data === "") return
         let url: URL
@@ -72,7 +73,7 @@
             lastStatusUpdate = Date.now()
             return
         }
-
+        
         qrScanner.stop();
 
         let name = `${issuer}${issuer !== "" ? ": " : ""}${user}`
@@ -196,6 +197,7 @@
         margin: 0 auto auto;
     }
 
+
     p {
         margin: 0 auto;
         color: var(--main-color);
@@ -214,3 +216,13 @@
         pointer-events: none
     }
 </style>
+/*
+GUI App: Made a lot of changes, including a partial migration to Svelte 5 and Svelte Runes. It now actually works properly and is more user friendly. It can now get account info (issuer, label) from QR-code scans as well, and shows a help modal when first opened. Also added better error handling and error messages.
+
+Server: Made a self-hosted server with Koa and LevelDB (beta) that follows the same API as the Cloudflare 
+Workers implementation (but with a configurable ratelimit so you don't get ratelimited on your own server).
+
+https://github.com/blobbybilb/TOTP-App
+https://cloud-d9deu6e20-hack-club-bot.vercel.app/0whatsapp_image_2025-01-22_at_12.50.17_pm.jpeg
+
+*/
