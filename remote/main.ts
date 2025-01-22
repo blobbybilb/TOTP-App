@@ -63,7 +63,6 @@ async function setData(token: string, env: Env, data: string): Promise<Response>
     return createResponse(RemoteStatus.Success)
 }
 
-
 export default {
     async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
         const [action, token] =
